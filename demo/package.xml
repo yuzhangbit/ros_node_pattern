@@ -5,7 +5,6 @@
     <license>Apache 2.0</license>
     <version>0.0.1</version>
     <buildtool_depend>catkin</buildtool_depend>
-    <depend>rosparam_handler</depend>
     <depend>roscpp</depend>A
     <depend>roslib</depend>
     <depend>std_msgs</depend>

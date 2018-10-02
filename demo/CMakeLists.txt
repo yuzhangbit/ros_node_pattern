@@ -27,6 +27,12 @@ add_executable(simple_node
 target_link_libraries(simple_node
   ${catkin_LIBRARIES})
 
+add_executable(simple_class_node
+  src/simple_class_node.cpp)
+
+target_link_libraries(simple_class_node
+  ${catkin_LIBRARIES})
+
 
 
 
