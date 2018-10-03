@@ -7,6 +7,7 @@
  *        Email: yu.zhang.bit@gmail.com
  */
 #include "simple_node_class.hpp"
+#include <string>
 
 int main(int argc, char** argv) {
     std::string node_name = "simple_class_node";

@@ -7,6 +7,7 @@
  *        Email: yu.zhang.bit@gmail.com
  */
 #include "simple_node_class.hpp"
+#include <string>
 
 int main(int argc, char** argv) {
     std::string node_name = "simple_class_node";
@@ -15,8 +16,9 @@ int main(int argc, char** argv) {
     ros::NodeHandle nh_private("~");
     demo::SimpleNodeClass node(nh, nh_private);
     ROS_INFO("Initialized an async multi-thread node.");
-    ros::AsyncSpinner s(4); // Use 4 threads
+    ros::AsyncSpinner s(4);  // Use 4 threads
     ROS_INFO_STREAM("Main loop in thread:" << boost::this_thread::get_id());
     s.start();
     ros::waitForShutdown();
 }
+
