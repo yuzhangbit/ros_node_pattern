@@ -11,6 +11,8 @@
 
 #include <ros/ros.h>
 #include <std_msgs/String.h>
+#include <boost/thread.hpp>
+
 namespace demo {
 
 class SimpleClassNode {
@@ -18,8 +20,20 @@ class SimpleClassNode {
     SimpleClassNode(const ros::NodeHandle &node_handle,
             const ros::NodeHandle &private_node_handle);
     ~SimpleClassNode() = default;
+    /**
+     *  Initialize the publisher, subscribers, timers
+     *  and parameters from the yaml files
+     */
     void init();
+    /**
+     * Subscriber callback function
+     * @param msg
+     */
     void subscriberCallback(const std_msgs::String::ConstPtr& msg);
+    /**
+     * Timer callback function
+     * @param event
+     */
     void periodicTimerCallback(const ros::TimerEvent& event);
  private:
     // public ros node handle

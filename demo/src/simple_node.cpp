@@ -9,7 +9,7 @@
 #include <ros/ros.h>
 #include <std_msgs/String.h>
 
-#include <sstream>
+// #include <sstream>
 static unsigned int callback_count = 0;
 
 /**
@@ -17,7 +17,9 @@ static unsigned int callback_count = 0;
  */
 void subscriberCallback(const std_msgs::String::ConstPtr& msg)
 {
-    ROS_INFO("subscriber callback: [%s], [%d]", msg->data.c_str(), callback_count);
+    ROS_INFO("subscriber callback: [%s], [%d]",
+             msg->data.c_str(),
+             callback_count);
     callback_count++;
     ros::Rate loop_rate(2);
     loop_rate.sleep();
@@ -66,7 +68,9 @@ int main(int argc, char **argv)
      * buffer up before throwing some away.
      */
     ros::Publisher periodic_pub = n.advertise<std_msgs::String>("publisher", 1);
-    ros::Subscriber sub1 = n.subscribe<std_msgs::String>("subscriber", 1, subscriberCallback);
+    ros::Subscriber sub1 = n.subscribe<std_msgs::String>("subscriber",
+                                                         1,
+                                                         subscriberCallback);
     
     ros::Rate loop_rate(10);
     
