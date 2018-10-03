@@ -15,7 +15,7 @@ int main(int argc, char** argv) {
     ros::NodeHandle nh_private("~");
     demo::SimpleClassNode node(nh, nh_private);
     ROS_INFO("Initialized a multi-thread node.");
-    ros::MultiThreadedSpinner s(2); // Use 2 threads
+    ros::MultiThreadedSpinner s(4); // Use 2 threads
     
     ROS_INFO_STREAM("Main loop in thread:" << boost::this_thread::get_id());
     ros::spin(s);

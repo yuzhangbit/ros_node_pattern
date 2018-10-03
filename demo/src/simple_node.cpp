@@ -10,18 +10,40 @@
 #include <std_msgs/String.h>
 
 // #include <sstream>
-static unsigned int callback_count = 0;
+static unsigned int callback1_count = 0;
+static unsigned int callback2_count = 0;
+static unsigned int callback3_count = 0;
 
 /**
  * This tutorial demonstrates simple receipt of messages over the ROS system.
  */
-void subscriberCallback(const std_msgs::String::ConstPtr& msg)
+void subscriberCallback1(const std_msgs::String::ConstPtr& msg)
 {
-    ROS_INFO("subscriber callback: [%s], [%d]",
+    ROS_INFO("The first subscriber callback: [%s], [%d]",
              msg->data.c_str(),
-             callback_count);
-    callback_count++;
-    ros::Rate loop_rate(2);
+             callback1_count);
+    callback1_count++;
+    ros::Rate loop_rate(5);
+    loop_rate.sleep();
+}
+
+void subscriberCallback2(const std_msgs::String::ConstPtr& msg)
+{
+    ROS_INFO("The second subscriber callback: [%s], [%d]",
+             msg->data.c_str(),
+             callback2_count);
+    callback2_count++;
+    ros::Rate loop_rate(5);
+    loop_rate.sleep();
+}
+
+void subscriberCallback3(const std_msgs::String::ConstPtr& msg)
+{
+    ROS_INFO("The third subscriber callback: [%s], [%d]",
+             msg->data.c_str(),
+             callback3_count);
+    callback3_count++;
+    ros::Rate loop_rate(5);
     loop_rate.sleep();
 }
 
@@ -67,11 +89,16 @@ int main(int argc, char **argv)
      * than we can send them, the number here specifies how many messages to
      * buffer up before throwing some away.
      */
-    ros::Publisher periodic_pub = n.advertise<std_msgs::String>("publisher", 1);
-    ros::Subscriber sub1 = n.subscribe<std_msgs::String>("subscriber",
+    ros::Publisher periodic_pub = n.advertise<std_msgs::String>("/publisher", 1);
+    ros::Subscriber sub1 = n.subscribe<std_msgs::String>("/subscriber",
                                                          1,
-                                                         subscriberCallback);
-    
+                                                         subscriberCallback1);
+    ros::Subscriber sub2 = n.subscribe<std_msgs::String>("/subscriber",
+                                                         1,
+                                                         subscriberCallback2);
+    ros::Subscriber sub3 = n.subscribe<std_msgs::String>("/subscriber",
+                                                         1,
+                                                         subscriberCallback3);
     ros::Rate loop_rate(10);
     
     /**

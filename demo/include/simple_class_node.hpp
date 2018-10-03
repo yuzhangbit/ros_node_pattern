@@ -29,7 +29,9 @@ class SimpleClassNode {
      * Subscriber callback function
      * @param msg
      */
-    void subscriberCallback(const std_msgs::String::ConstPtr& msg);
+    void subscriberCallback1(const std_msgs::String::ConstPtr& msg);
+    void subscriberCallback2(const std_msgs::String::ConstPtr& msg);
+    void subscriberCallback3(const std_msgs::String::ConstPtr& msg);
     /**
      * Timer callback function
      * @param event
@@ -45,11 +47,15 @@ class SimpleClassNode {
     ros::Timer periodic_timer_;
     
     // subscriber and publisher
-    ros::Subscriber sub_;
+    ros::Subscriber sub1_;
+    ros::Subscriber sub2_;
+    ros::Subscriber sub3_;
     // publisher
     ros::Publisher periodic_pub_;
     
-    unsigned int sub_callback_count_;
+    unsigned int sub1_callback_count_;
+    unsigned int sub2_callback_count_;
+    unsigned int sub3_callback_count_;
     unsigned int pub_periodic_count_;
 }; // class SimpleClassNode
 
