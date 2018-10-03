@@ -23,7 +23,7 @@ catkin_package(
 )
 
 add_library(simple_class_node
-  src/simple_class_node.cpp)
+  src/simple_node_class.cpp)
 
 target_link_libraries(simple_class_node
   ${catkin_LIBRARIES})

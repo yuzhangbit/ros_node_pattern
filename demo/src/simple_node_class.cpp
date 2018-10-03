@@ -7,11 +7,11 @@
  *        Email: yu.zhang.bit@gmail.com
  */
 #include <string>
-#include "simple_class_node.hpp"
+#include "simple_node_class.hpp"
 
 
 namespace demo {
-SimpleClassNode::SimpleClassNode(const ros::NodeHandle &node_handle,
+SimpleNodeClass::SimpleNodeClass(const ros::NodeHandle &node_handle,
                                  const ros::NodeHandle &private_node_handle)
     :nh_(node_handle),
      pnh_(private_node_handle),
@@ -22,27 +22,27 @@ SimpleClassNode::SimpleClassNode(const ros::NodeHandle &node_handle,
     this->init();
 }
 
-void SimpleClassNode::init() {
+void SimpleNodeClass::init() {
     periodic_pub_ = pnh_.advertise<std_msgs::String>("/publisher", 1);
     sub1_ = pnh_.subscribe("/subscriber",
                           1,
-                          &SimpleClassNode::subscriberCallback1,
+                          &SimpleNodeClass::subscriberCallback1,
                           this);
     sub2_ = pnh_.subscribe("/subscriber",
                            1,
-                           &SimpleClassNode::subscriberCallback2,
+                           &SimpleNodeClass::subscriberCallback2,
                            this);
     sub3_ = pnh_.subscribe("/subscriber",
                            1,
-                           &SimpleClassNode::subscriberCallback3,
+                           &SimpleNodeClass::subscriberCallback3,
                            this);
     periodic_timer_ = pnh_.createTimer(ros::Duration(0.1),
-                                       &SimpleClassNode::periodicTimerCallback,
+                                       &SimpleNodeClass::periodicTimerCallback,
                                        this);
     
 }
 
-void SimpleClassNode::periodicTimerCallback(const ros::TimerEvent &event) {
+void SimpleNodeClass::periodicTimerCallback(const ros::TimerEvent &event) {
     std_msgs::String msg;
     
     std::stringstream ss;
@@ -62,32 +62,35 @@ void SimpleClassNode::periodicTimerCallback(const ros::TimerEvent &event) {
     pub_periodic_count_++;
 }
 
-void SimpleClassNode::subscriberCallback1(
+void SimpleNodeClass::subscriberCallback1(
         const std_msgs::String::ConstPtr &msg) {
     ROS_INFO_STREAM("First subscriber callback "
                             << sub1_callback_count_ << ", in thread:"
                             << boost::this_thread::get_id());
     sub1_callback_count_++;
     ros::Rate loop_rate(5);
+    // sleep for 200ms
     loop_rate.sleep();
 }
 
-void SimpleClassNode::subscriberCallback2(
+void SimpleNodeClass::subscriberCallback2(
         const std_msgs::String::ConstPtr &msg) {
     ROS_INFO_STREAM("Second subscriber callback "
                             << sub2_callback_count_ << ", in thread:"
                             << boost::this_thread::get_id());
     sub2_callback_count_++;
     ros::Rate loop_rate(5);
+    // sleep for 200ms
     loop_rate.sleep();
 }
-void SimpleClassNode::subscriberCallback3(
+void SimpleNodeClass::subscriberCallback3(
         const std_msgs::String::ConstPtr &msg) {
     ROS_INFO_STREAM("Third subscriber callback "
                             << sub3_callback_count_ << ", in thread:"
                             << boost::this_thread::get_id());
     sub3_callback_count_++;
     ros::Rate loop_rate(5);
+    // sleep for 200ms
     loop_rate.sleep();
 }
 }  // namespace demo

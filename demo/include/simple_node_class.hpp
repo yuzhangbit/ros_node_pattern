@@ -15,11 +15,11 @@
 
 namespace demo {
 
-class SimpleClassNode {
+class SimpleNodeClass {
  public:
-    SimpleClassNode(const ros::NodeHandle &node_handle,
+    SimpleNodeClass(const ros::NodeHandle &node_handle,
             const ros::NodeHandle &private_node_handle);
-    ~SimpleClassNode() = default;
+    ~SimpleNodeClass() = default;
     /**
      *  Initialize the publisher, subscribers, timers
      *  and parameters from the yaml files
@@ -57,7 +57,7 @@ class SimpleClassNode {
     unsigned int sub2_callback_count_;
     unsigned int sub3_callback_count_;
     unsigned int pub_periodic_count_;
-}; // class SimpleClassNode
+}; // class SimpleNodeClass
 
 }  // namespace demo
 

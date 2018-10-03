@@ -8,6 +8,7 @@
  */
 #include <ros/ros.h>
 #include <std_msgs/String.h>
+#include <boost/thread.hpp>
 
 // #include <sstream>
 static unsigned int callback1_count = 0;
@@ -19,31 +20,34 @@ static unsigned int callback3_count = 0;
  */
 void subscriberCallback1(const std_msgs::String::ConstPtr& msg)
 {
-    ROS_INFO("The first subscriber callback: [%s], [%d]",
-             msg->data.c_str(),
-             callback1_count);
+    ROS_INFO_STREAM("First subscriber callback: "
+                            << callback1_count
+                            << ", in thread: " << boost::this_thread::get_id());
     callback1_count++;
     ros::Rate loop_rate(5);
+    // sleep for 200ms
     loop_rate.sleep();
 }
 
 void subscriberCallback2(const std_msgs::String::ConstPtr& msg)
 {
-    ROS_INFO("The second subscriber callback: [%s], [%d]",
-             msg->data.c_str(),
-             callback2_count);
+    ROS_INFO_STREAM("Second subscriber callback: "
+            << callback2_count << ", in thread: "
+            << boost::this_thread::get_id());
     callback2_count++;
     ros::Rate loop_rate(5);
+    // sleep for 200ms
     loop_rate.sleep();
 }
 
 void subscriberCallback3(const std_msgs::String::ConstPtr& msg)
 {
-    ROS_INFO("The third subscriber callback: [%s], [%d]",
-             msg->data.c_str(),
-             callback3_count);
+    ROS_INFO_STREAM("Third subscriber callback: "
+            << callback3_count << ", in thread: "
+            << boost::this_thread::get_id());
     callback3_count++;
     ros::Rate loop_rate(5);
+    // sleep for 200ms
     loop_rate.sleep();
 }
 
@@ -106,6 +110,8 @@ int main(int argc, char **argv)
      * a unique string for each message.
      */
     int count = 0;
+    
+    ROS_INFO_STREAM("Main loop in thread: " << boost::this_thread::get_id());
     while (ros::ok())
     {
         /**
@@ -117,7 +123,8 @@ int main(int argc, char **argv)
         ss << "Periodic Publisher " << count;
         msg.data = ss.str();
         
-        ROS_INFO("%s", msg.data.c_str());
+        ROS_INFO_STREAM("" << msg.data.c_str() <<", in thread: "
+            << boost::this_thread::get_id());
         
         /**
          * The publish() function is how you send messages. The parameter
