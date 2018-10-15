@@ -6,7 +6,7 @@
   `rosrun demo single_thread_node_instance`
 * multi-thread class node: [src/multi_thread_node_instance.cpp](https://github.com/yuzhangbit/ros_node_pattern/blob/master/demo/src/multi_thread_node_instance.cpp)   
 `rosrun demo multi_thread_node_instance`
-* async multi-thread class node: [src/async_multi_threads_node_instance.cpp](https://github.com/yuzhangbit/ros_node_pattern/blob/master/demo/src/async_multi_threads_node_instance.cpp)   
+* async multi-thread class node: [src/async_multi_thread_node_instance.cpp](https://github.com/yuzhangbit/ros_node_pattern/blob/master/demo/src/async_multi_thread_node_instance.cpp)   
 `rosrun demo async_multi_threads_node_instance`
 * A python node publishing messages that trigger callback functions of above nodes: [scripts/sender.py](https://github.com/yuzhangbit/ros_node_pattern/tree/master/demo/scripts)  
 `python sender.py`
